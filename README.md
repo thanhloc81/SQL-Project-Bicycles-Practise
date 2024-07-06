@@ -208,6 +208,62 @@ ORDER BY
 ### Results
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/35ef7e9b-16ab-47eb-a730-448cc6e46ede)
 
+## Question 7: Calc Ratio of Stock / Sales in 2011 by product name, by month. Order results by month desc, ratio desc. Round Ratio to 1 decimal mom yoy
+``````
+WITH cte1 AS (
+    SELECT 
+        EXTRACT(MONTH FROM SOD.ModifiedDate) AS Month,
+        EXTRACT(YEAR FROM SOD.ModifiedDate) AS Year,
+        PP.ProductID,
+        PP.Name,
+        SUM(SOD.OrderQty) AS Order_Qty
+    FROM 
+        adventureworks2019.Sales.SalesOrderDetail SOD
+    LEFT JOIN 
+        adventureworks2019.Production.Product PP 
+            ON PP.ProductID = SOD.ProductID
+    WHERE 
+        EXTRACT(YEAR FROM SOD.ModifiedDate) = 2011
+    GROUP BY 
+        1, 2, 3, 4
+),
+cte2 AS (
+    SELECT 
+        EXTRACT(MONTH FROM PWO.ModifiedDate) AS Month,
+        EXTRACT(YEAR FROM PWO.ModifiedDate) AS Year,
+        PWO.ProductID,
+        Name,
+        SUM(StockedQty) AS Stock_Qty
+    FROM 
+        adventureworks2019.Production.WorkOrder PWO
+    LEFT JOIN 
+        adventureworks2019.Production.Product PP 
+            ON PP.ProductID = PWO.ProductID
+    WHERE 
+        EXTRACT(YEAR FROM PWO.ModifiedDate) = 2011
+    GROUP BY 
+        1, 2, 3, 4
+)
+
+SELECT 
+    cte2.Month,
+    cte2.Year,
+    cte2.ProductID,
+    cte2.Name,
+    COALESCE(Order_Qty, 0) Total_Order_Qty,
+    COALESCE(Stock_Qty, 0) Total_Stock_Qty,
+    ROUND(Stock_Qty / NULLIF(Order_Qty, 0), 2) AS Ratio
+FROM 
+    cte2
+LEFT JOIN 
+    cte1 ON cte1.ProductID = cte2.ProductID 
+        AND cte1.Month = cte2.Month
+ORDER BY 
+    1 DESC, 7 DESC;
+``````
+### Results
+![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/04c1a7d7-beee-4fc5-9d09-9f6f038e6c80)
+
 
 
 
