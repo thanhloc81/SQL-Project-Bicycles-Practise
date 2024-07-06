@@ -2,15 +2,15 @@
 ✨ Using SQL to extract data following a simulated task
 
 [Link BigQuery](https://console.cloud.google.com/bigquery?sq=400862878778:f171ee5c3bd14daebaf2efc24e417309)
-# Dataset
+## Dataset
 - Utilizing the Adventure Works dataset, which consists of two main modules: Sales and Product.
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/8511b949-1e13-4e47-8552-5f25303081e6)![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/8e19a434-ef19-4a63-b745-3764225890f3)
 
-# Tools
+## Tools
 - Google BigQuery
 
-# Practise
-## Question 1: Calc Quantity of items, Sales value & Order quantity by each Subcategory in L12M
+## Practise
+### Question 1: Calc Quantity of items, Sales value & Order quantity by each Subcategory in L12M
 ``````
 SELECT 
     EXTRACT(MONTH from SOD.ModifiedDate) Month,
@@ -39,10 +39,10 @@ GROUP BY
 ORDER BY    
     1, 2;
 ``````
-### Results
+#### Results
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/909680a8-6df7-4e88-98bf-bf0f8265e11b)
 
-## Question 2: Calc % YoY growth rate by SubCategory & release top 3 cat with highest grow rate. Round results to 2 decimal
+### Question 2: Calc % YoY growth rate by SubCategory & release top 3 cat with highest grow rate. Round results to 2 decimal
 ``````
 WITH cte AS (
   SELECT 
@@ -74,10 +74,10 @@ ORDER BY
 LIMIT 
   3;
 ``````
-### Results
+#### Results
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/9334276f-378e-48d1-b464-4750dc8e70db)
 
-## Question 3: Ranking Top 3 TeritoryID with biggest Order quantity of every year. If there's TerritoryID with same quantity in a year, do not skip the rank number
+### Question 3: Ranking Top 3 TeritoryID with biggest Order quantity of every year. If there's TerritoryID with same quantity in a year, do not skip the rank number
 ``````
 WITH cte AS (
   SELECT 
@@ -103,10 +103,10 @@ WHERE Rank <= 3
 ORDER BY 
   1 DESC;
 ``````
-### Results
+#### Results
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/b6e01fd6-e9a2-43d9-bafd-f964a99e9bcf)
 
-## Question 4: Calc Total Discount Cost belongs to Seasonal Discount for each SubCategory
+### Question 4: Calc Total Discount Cost belongs to Seasonal Discount for each SubCategory
 ``````
 SELECT 
     EXTRACT(YEAR FROM SOD.ModifiedDate) AS Year,
@@ -129,10 +129,10 @@ GROUP BY
     1, 2;
 
 ``````
-### Results
+#### Results
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/c4f88e23-77f8-40ce-be8f-991219fd8ee7)
 
-## Question 5: Retention rate of Customer in 2014 with status of Successfully Shipped (Cohort Analysis)
+### Question 5: Retention rate of Customer in 2014 with status of Successfully Shipped (Cohort Analysis)
 ``````
 WITH total_cus AS (
   SELECT 
@@ -165,10 +165,10 @@ GROUP BY
 ORDER BY 
   1, 2;
 ``````
-### Results
+#### Results
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/47b76fd9-3b97-45e6-a9ed-b920b3ce34e9)
 
-## Question 6: Trend of Stock level & MoM diff % by all product in 2011. If %gr rate is null then 0. Round to 1 decimal
+### Question 6: Trend of Stock level & MoM diff % by all product in 2011. If %gr rate is null then 0. Round to 1 decimal
 ``````
 WITH cte AS (
   SELECT 
@@ -205,10 +205,10 @@ ORDER BY
   Name;
 
 ``````
-### Results
+#### Results
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/35ef7e9b-16ab-47eb-a730-448cc6e46ede)
 
-## Question 7: Calc Ratio of Stock / Sales in 2011 by product name, by month. Order results by month desc, ratio desc. Round Ratio to 1 decimal mom yoy
+### Question 7: Calc Ratio of Stock / Sales in 2011 by product name, by month. Order results by month desc, ratio desc. Round Ratio to 1 decimal mom yoy
 ``````
 WITH cte1 AS (
     SELECT 
@@ -261,7 +261,7 @@ LEFT JOIN
 ORDER BY 
     1 DESC, 7 DESC;
 ``````
-### Results
+#### Results
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/04c1a7d7-beee-4fc5-9d09-9f6f038e6c80)
 
 
