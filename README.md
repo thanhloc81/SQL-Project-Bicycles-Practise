@@ -11,7 +11,7 @@
 
 ## Practise
 ### Question 1: Calc Quantity of items, Sales value & Order quantity by each Subcategory in L12M
-``````
+``````sql
 SELECT 
     EXTRACT(MONTH from SOD.ModifiedDate) Month,
     EXTRACT(YEAR from SOD.ModifiedDate) Year,
@@ -43,7 +43,7 @@ ORDER BY
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/909680a8-6df7-4e88-98bf-bf0f8265e11b)
 
 ### Question 2: Calc % YoY growth rate by SubCategory & release top 3 cat with highest grow rate. Round results to 2 decimal
-``````
+``````sql
 WITH cte AS (
   SELECT 
     EXTRACT(YEAR FROM SOD.ModifiedDate) AS Year,
@@ -78,7 +78,7 @@ LIMIT
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/9334276f-378e-48d1-b464-4750dc8e70db)
 
 ### Question 3: Ranking Top 3 TeritoryID with biggest Order quantity of every year. If there's TerritoryID with same quantity in a year, do not skip the rank number
-``````
+``````sql
 WITH cte AS (
   SELECT 
     EXTRACT(YEAR FROM SOD.ModifiedDate) AS Year,
@@ -107,7 +107,7 @@ ORDER BY
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/b6e01fd6-e9a2-43d9-bafd-f964a99e9bcf)
 
 ### Question 4: Calc Total Discount Cost belongs to Seasonal Discount for each SubCategory
-``````
+``````sql
 SELECT 
     EXTRACT(YEAR FROM SOD.ModifiedDate) AS Year,
     PPS.Name,
@@ -133,7 +133,7 @@ GROUP BY
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/c4f88e23-77f8-40ce-be8f-991219fd8ee7)
 
 ### Question 5: Retention rate of Customer in 2014 with status of Successfully Shipped (Cohort Analysis)
-``````
+``````sql
 WITH total_cus AS (
   SELECT 
     EXTRACT(MONTH FROM ModifiedDate) AS month,
@@ -169,7 +169,7 @@ ORDER BY
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/47b76fd9-3b97-45e6-a9ed-b920b3ce34e9)
 
 ### Question 6: Trend of Stock level & MoM diff % by all product in 2011. If %gr rate is null then 0. Round to 1 decimal
-``````
+``````sql
 WITH cte AS (
   SELECT 
     PP.Name,
@@ -209,7 +209,7 @@ ORDER BY
 ![image](https://github.com/thanhloc81/SQL-Project-Bicycles-Practise/assets/151768013/35ef7e9b-16ab-47eb-a730-448cc6e46ede)
 
 ### Question 7: Calc Ratio of Stock / Sales in 2011 by product name, by month. Order results by month desc, ratio desc. Round Ratio to 1 decimal mom yoy
-``````
+``````sql
 WITH cte1 AS (
     SELECT 
         EXTRACT(MONTH FROM SOD.ModifiedDate) AS Month,
